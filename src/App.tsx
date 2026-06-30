@@ -96,7 +96,24 @@ function buildMessages(product: ProductInfo, settings: GenerationSettings) {
   const textContent = buildUserMessage(product, settings)
   const images = product.productImages ?? []
 
+  const isAnthropic = settings.aiModel.startsWith("anthropic/")
+
   if (images.length > 0) {
+    if (isAnthropic) {
+      return [
+        { role: "system" as const, content: buildSystemPrompt(product, settings) },
+        {
+          role: "user" as const,
+          content: [
+            ...images.map((url) => ({
+              type: "image_url" as const,
+              image_url: { url, detail: "auto" },
+            })),
+            { type: "text" as const, text: textContent },
+          ],
+        },
+      ]
+    }
     return [
       { role: "system" as const, content: buildSystemPrompt(product, settings) },
       {
@@ -241,8 +258,14 @@ function MainApp() {
 
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}))
+        const msg = errorData?.error?.message || ""
+        const meta = errorData?.error?.metadata
+          ? ` (${JSON.stringify(errorData.error.metadata).slice(0, 200)})`
+          : ""
         throw new Error(
-          errorData?.error?.message || `API error: ${response.status} ${response.statusText}`
+          msg
+            ? `${msg}${meta}`
+            : `API error: ${response.status} ${response.statusText}`
         )
       }
 
