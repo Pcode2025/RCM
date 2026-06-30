@@ -50,19 +50,21 @@ IMAGE PROMPT rules: Product packaging comes alive as 3D cartoon mascot with expr
 VIDEO PROMPT format (all three video prompts must include labeled sections):
 MASTER PROMPT [TYPE] | [X]s | VERTICAL 9:16
 PRODUCT FIDELITY LOCK: [packaging details to preserve]
-SCENE: [description]
-CAMERA: [movements]
-ANIMATION: [VFX, mascot gestures, feature bubbles]
-${settings.language} VOICEOVER: [native script]
-ON-SCREEN TEXT: [overlays]
-MUSIC: [BGM]
-NEGATIVE PROMPT: [what to avoid]
+SCENE: [description in English]
+CAMERA: [movements in English]
+ANIMATION: [VFX, mascot gestures, feature bubbles - ALL text/labels in English only]
+${settings.language} VOICEOVER: [script written in ${settings.language} language only]
+ON-SCREEN TEXT: [overlays - ALWAYS in English only, never in ${settings.language}]
+MUSIC: [BGM description in English]
+NEGATIVE PROMPT: [what to avoid in English]
+
+CRITICAL LANGUAGE RULE: ONLY the VOICEOVER line must be written in ${settings.language}. Everything else — SCENE, CAMERA, ANIMATION text, ON-SCREEN TEXT, MUSIC, NEGATIVE PROMPT, and all overlay/caption text — MUST be in English. Do NOT put any ${settings.language} script in ON-SCREEN TEXT or ANIMATION labels. The on-screen text viewers see must always be English.
 
 Hook=${settings.duration.hook}s: pain-point opener, problem question
 Content=${settings.duration.content}s: mascot hero + animated benefit bubbles + family background
 Content2=${settings.duration.content2}s: deeper product demo, second set of benefit bubbles, usage moment, social proof
-CTA=${settings.duration.cta}s: store visit CTA, location pins, product close-up ending. Use this EXACT call-to-action message verbatim in the ${settings.language} VOICEOVER and ON-SCREEN TEXT (do not translate or rephrase it): "${product.ctaMessage}"
-Language: ${settings.language}, tone: warm, family, Indian cultural context`
+CTA=${settings.duration.cta}s: store visit CTA, location pins, product close-up ending. Use this EXACT call-to-action message verbatim in the ${settings.language} VOICEOVER only (do not translate or rephrase it): "${product.ctaMessage}". The ON-SCREEN TEXT for CTA must be in English.
+Language: ${settings.language} for voiceover ONLY, English for all other text elements. Tone: warm, family, Indian cultural context`
 }
 
 function buildUserMessage(product: ProductInfo, settings: GenerationSettings): string {
