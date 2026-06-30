@@ -53,10 +53,12 @@ PRODUCT FIDELITY LOCK: [packaging details to preserve]
 SCENE: [description in English]
 CAMERA: [movements in English]
 ANIMATION: [VFX, mascot gestures, feature bubbles - ALL text/labels in English only]
-${settings.language} VOICEOVER: [script written in ${settings.language} language only]
+${settings.language} VOICEOVER: [script written in ${settings.language} language only, using a ${settings.voiceType} voice, age ${settings.voiceAge} years]
 ON-SCREEN TEXT: [overlays - ALWAYS in English only, never in ${settings.language}]
 MUSIC: [BGM description in English]
 NEGATIVE PROMPT: [what to avoid in English]
+
+VOICEOVER VOICE DIRECTION: The voiceover must sound like a ${settings.voiceAge}-year-old ${settings.voiceType} voice. Write the ${settings.language} script with tone, pacing, and vocabulary appropriate for this voice type and age. Include a voice direction note at the start of each VOICEOVER line specifying: "[${settings.voiceType}, Age ${settings.voiceAge}]"
 
 CRITICAL LANGUAGE RULE: ONLY the VOICEOVER line must be written in ${settings.language}. Everything else — SCENE, CAMERA, ANIMATION text, ON-SCREEN TEXT, MUSIC, NEGATIVE PROMPT, and all overlay/caption text — MUST be in English. Do NOT put any ${settings.language} script in ON-SCREEN TEXT or ANIMATION labels. The on-screen text viewers see must always be English.
 

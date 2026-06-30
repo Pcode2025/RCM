@@ -17,6 +17,7 @@ import {
   IMAGE_MODEL_SUGGESTIONS,
   VIDEO_MODEL_SUGGESTIONS,
   AI_MODEL_GROUPS,
+  VOICE_TYPES,
   type GenerationSettings,
 } from "@/types"
 
@@ -84,6 +85,44 @@ export function AppSidebar({
             ))}
           </SelectContent>
         </Select>
+      </div>
+
+      {/* Voiceover */}
+      <div className="flex flex-col gap-2">
+        <Label className="text-xs text-muted-foreground uppercase tracking-wider">
+          Voiceover
+        </Label>
+        <div className="flex flex-col gap-2">
+          <Select
+            value={settings.voiceType}
+            onValueChange={(v) => onChange({ ...settings, voiceType: v })}
+          >
+            <SelectTrigger className="w-full bg-card border-border text-foreground text-sm h-9">
+              <SelectValue placeholder="Voice type" />
+            </SelectTrigger>
+            <SelectContent className="bg-card border-border">
+              {VOICE_TYPES.map((vt) => (
+                <SelectItem key={vt} value={vt} className="text-foreground text-sm">
+                  {vt}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          <div className="flex items-center gap-2">
+            <Label className="text-xs text-muted-foreground whitespace-nowrap">Age</Label>
+            <Input
+              type="number"
+              min={5}
+              max={80}
+              value={settings.voiceAge}
+              onChange={(e) =>
+                onChange({ ...settings, voiceAge: Math.max(5, Math.min(80, Number(e.target.value) || 30)) })
+              }
+              className="bg-card border-border text-foreground text-sm h-8 w-16 text-center"
+            />
+            <span className="text-xs text-muted-foreground">yrs</span>
+          </div>
+        </div>
       </div>
 
       {/* Duration Settings */}

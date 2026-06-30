@@ -51,6 +51,8 @@ interface PromptGenerationRow {
   ai_model: string
   image_model: string
   video_model: string
+  voice_type: string
+  voice_age: number
   hook_duration: number
   content_duration: number
   content2_duration: number
@@ -81,6 +83,8 @@ function rowToGeneration(row: PromptGenerationRow): PromptGeneration {
       aiModel: row.ai_model,
       imageModel: row.image_model,
       videoModel: row.video_model,
+      voiceType: row.voice_type ?? "Male",
+      voiceAge: row.voice_age ?? 30,
       duration: {
         hook: row.hook_duration,
         content: row.content_duration,
@@ -112,6 +116,8 @@ export async function savePromptGeneration(
       ai_model: settings.aiModel,
       image_model: settings.imageModel,
       video_model: settings.videoModel,
+      voice_type: settings.voiceType,
+      voice_age: settings.voiceAge,
       hook_duration: settings.duration.hook,
       content_duration: settings.duration.content,
       content2_duration: settings.duration.content2,

@@ -24,10 +24,25 @@ export interface DurationSettings {
 export interface GenerationSettings {
   language: string
   duration: DurationSettings
+  voiceType: string
+  voiceAge: number
   imageModel: string
   videoModel: string
   aiModel: string
 }
+
+export const VOICE_TYPES = [
+  "Male",
+  "Female",
+  "Boy",
+  "Girl",
+  "Old Man",
+  "Old Woman",
+  "Deep Male",
+  "Soft Female",
+  "Narrator Male",
+  "Narrator Female",
+] as const
 
 export interface AiModelOption {
   id: string
@@ -160,6 +175,8 @@ export const SAMPLE_PRODUCT: ProductInfo = {
 export const DEFAULT_SETTINGS: GenerationSettings = {
   language: "Kannada",
   duration: { hook: 5, content: 10, content2: 10, cta: 10 },
+  voiceType: "Male",
+  voiceAge: 30,
   imageModel: "Flux Pro",
   videoModel: "Kling 3.0",
   aiModel: "google/gemini-2.5-flash",
